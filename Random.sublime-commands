@@ -6,6 +6,7 @@
     { "caption": "Random:Date", "command": "random_date" },
     { "caption": "Random:Word", "command": "random_word" },
     { "caption": "Random:Text", "command": "random_text" },
+    { "caption": "Random:String", "command": "random_string" },
     { "caption": "Random:First Name", "command": "random_first_name" },
     { "caption": "Random:Last Name", "command": "random_last_name" },
     { "caption": "Random:Full Name", "command": "random_full_name" },

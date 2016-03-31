@@ -147,6 +147,15 @@ class RandomTextCommand(RandomText):
     def run(self, view, **kwargs):
         self.insert(view, self.generate_text)
 
+class RandomStringCommand(RandomText):
+
+    def generate_string(self):
+        words = self.get_words()
+        return '-'.join([random.choice(words) for i in range(0,2)])
+
+    def run(self, view, **kwargs):
+        self.insert(view, self.generate_string)
+
 class RandomUuidCommand(RandomText):
 
     def generate_uuid(self):
