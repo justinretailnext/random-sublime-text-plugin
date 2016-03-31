@@ -19,9 +19,10 @@ class RandomWindow(sublime_plugin.WindowCommand):
     def get_range(self, input):
         try:
             start, stop = input.split('-')
+            padding = min(len(start), len(stop))
             start = int(start)
             stop = int(stop)
-            self.insert({'start': start, 'stop': stop})
+            self.insert({'start': start, 'stop': stop, 'padding': padding})
         except:
             sublime.error_message('Must be two integers, separated by: - ')
 
@@ -80,11 +81,14 @@ Text commands
 class RandomIntCommand(RandomText):
     def generate_int(self):
         output = random.randint(self.start, self.stop)
-        return str(output)
+        output = str(output)
+        output = output.zfill(self.padding)
+        return output
 
     def run(self, view, **kwargs):
         self.start = kwargs['start']
         self.stop = kwargs['stop']
+        self.padding = kwargs['padding']
         self.insert(view, self.generate_int)
 
 class RandomFloatCommand(RandomText):
@@ -246,7 +250,7 @@ class RandomIpv6AddressCommand(RandomText):
     def generate_hexbyte(self):
         choice = "0123456789ABCDEF"
         return "%s%s" % (random.choice(choice), random.choice(choice))
-    
+
     def generate_ipv6_address(self):
         address = ""
         for x in range(0,8):
